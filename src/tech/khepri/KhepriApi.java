@@ -36,9 +36,8 @@ public class KhepriApi {
 	
 	
 	
-	
 	public static KhepriAnswer ask(Integer instanceId) throws Exception {
-		KhepriAnswer back = new KhepriErrorAnswer();
+		KhepriAnswer back = null;
 		
 		if (KhepriUrl != null && KhepriKey != null) {
 			
@@ -65,6 +64,7 @@ public class KhepriApi {
 				back = new KhepriSuccessAnswer();
 				back.setAnswer(jObject, con.getResponseCode());
 			} else {
+				back = new KhepriErrorAnswer();
 				back.setAnswer(jObject, con.getResponseCode());
 			}
 
@@ -76,5 +76,44 @@ public class KhepriApi {
 	}
 //	public static KhepriAnswer ask(int instanceId, KhepriExclude[] exclude){}
 //	public static KhepriAnswer ask(int instanceId, KhepriExclude[] exclude){}
+
+
+	public static KhepriAnswer success(Integer instanceId, String solution) throws Exception {
+		KhepriAnswer back = null;
+		
+		if (KhepriUrl != null && KhepriKey != null) {
+			
+			String chk = KhepriUrl + "/api/success.json?api_key=" + KhepriKey + "&instance=" + instanceId.toString() + "&solution=" + solution;
+			URL url = new URL(chk);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			BufferedReader in;
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			
+			try {
+				in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} catch (Exception e)  {
+				in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			JSONObject jObject  = new JSONObject(response.toString());
+			 
+			if (con.getResponseCode() == 200) {
+				back = new KhepriSuccessAnswer();
+				back.setAnswer(jObject, con.getResponseCode());
+			} else {
+				back = new KhepriErrorAnswer();
+				back.setAnswer(jObject, con.getResponseCode());
+			}
+			
+		} else
+			throw new Exception("[Error][Khepri][Khepri Not Initialized - Call init first]");
+		
+		return null;
+	}
 
 }

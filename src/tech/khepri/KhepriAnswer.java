@@ -9,13 +9,28 @@ public abstract class KhepriAnswer {
 	public Integer 	Dimension = null;
 	public String 	ErrorMessage = null;
 	
-	public void setAnswer(JSONObject KhepriAnswer, int code) {
+//	public void setAnswer(JSONObject KhepriAnswer, int code) {
 //		// TODO Auto-generated method stub
 //		StatusCode = new Integer(code);
 //		ErrorMessage = (String) KhepriAnswer.get("message");
 //		Status = (String) KhepriAnswer.get("status");
 		
+//	}
+	
+	public void setAnswer(JSONObject KhepriAnswer, int code) {
+		StatusCode = new Integer(code);
+		
+		if (KhepriAnswer.has("Solution") == true)
+			Solution = (String) KhepriAnswer.get("solution");
+		if (KhepriAnswer.has("Solution") == true)
+			Status = (String) KhepriAnswer.get("status");
+		if (KhepriAnswer.has("message") == true)
+			ErrorMessage = (String) KhepriAnswer.get("message");
+		if (KhepriAnswer.has("status") == true)
+			Status = (String) KhepriAnswer.get("status");
+		
 	}
+
 	
 	public void debug() {
 		
