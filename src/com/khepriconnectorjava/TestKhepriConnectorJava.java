@@ -43,7 +43,7 @@ public class TestKhepriConnectorJava extends HttpServlet {
 		response.getWriter().append(url + " - " + passwd);
 		try {
 			KhepriAnswer answer = KhepriApi.ask(3);
-			response.getWriter().append("Answer: " + answer.toString());
+			response.getWriter().append("<h1>Answer!</h1>");
 			response.getWriter().append("Answer: <pre>" + answer.getInfos());
 			
 		} catch (Exception e) {

@@ -3,14 +3,17 @@ package tech.khepri;
 import org.json.JSONObject;
 
 public abstract class KhepriAnswer {
-	public Integer 	StatusCode;
-	public String 	Status;
-	public String  	Solution;
-	public Integer 	Dimension;
-	public String 	ErrorMessage;
+	public Integer 	StatusCode = null;
+	public String 	Status = null;
+	public String  	Solution = null;
+	public Integer 	Dimension = null;
+	public String 	ErrorMessage = null;
 	
-	public void setAnswer(JSONObject jObject, int code) {
-		// TODO Auto-generated method stub
+	public void setAnswer(JSONObject KhepriAnswer, int code) {
+//		// TODO Auto-generated method stub
+//		StatusCode = new Integer(code);
+//		ErrorMessage = (String) KhepriAnswer.get("message");
+//		Status = (String) KhepriAnswer.get("status");
 		
 	}
 	
@@ -28,7 +31,14 @@ public abstract class KhepriAnswer {
 	public String getInfos() {
 		String back;
 		
-		back = "StatusCode: "  + StatusCode.toString() + "\nStatus: " + Status + "\nSolution: " + Solution + "\nDimension: " + Dimension.toString() + "\nErrorMessage: " + ErrorMessage;
+		back = "StatusCode: "  + (StatusCode == null ? "null" : StatusCode.toString());
+		back +=  "\nStatus: " + (Status == null ? "null" : Status);
+		back += "\nSolution: " + (Solution == null ? "null" : Solution);
+		back += "\nDimension: " + (Dimension == null ? "null" : Dimension.toString());
+		back += "\nSolution: " + (ErrorMessage == null ? "null" : ErrorMessage);
+		
+				
+		///back = "StatusCode: "  + StatusCode.toString() + "\nStatus: " + Status + "\nSolution: " + Solution + "\nDimension: " + Dimension.toString() + "\nErrorMessage: " + ErrorMessage;
 		return back;
 	}
 	
